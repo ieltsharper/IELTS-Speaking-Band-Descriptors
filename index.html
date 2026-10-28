@@ -82,7 +82,7 @@ h3{font-weight:700;font-size:1.1rem;margin:28px 0 8px}
 p.lede{color:var(--muted);margin:0 0 20px;max-width:72ch}
 
 /* ---------- controls ---------- */
-.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+.controls{display:flex;flex-direction:column;gap:10px;
   background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin-bottom:18px}
 .chip{border:1px solid var(--line-strong);background:var(--card);border-radius:999px;
   padding:6px 14px;cursor:pointer;font-size:.86rem;font-weight:600;color:var(--muted)}
@@ -90,8 +90,11 @@ p.lede{color:var(--muted);margin:0 0 20px;max-width:72ch}
 .chip[aria-pressed="true"]{background:var(--brand);color:var(--on-brand);border-color:var(--brand)}
 .chip.crit[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:#fff}
 @media (prefers-color-scheme: dark){.chip.crit[aria-pressed="true"]{color:#171311}}
-.sep{width:1px;height:22px;background:var(--line);margin:0 4px}
-.hint{font-size:.82rem;color:var(--muted);margin-left:auto}
+.ctrl-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
+.ctrl-row.options{gap:6px;padding-top:10px;border-top:1px solid var(--line)}
+.chip.sm{padding:3px 11px;font-size:.78rem}
+.sep{width:1px;height:18px;background:var(--line);margin:0 6px}
+.hint{font-size:.78rem;color:var(--muted)}
 
 /* ---------- descriptor grid ---------- */
 .gridhead{display:grid;gap:12px;margin-bottom:8px}
@@ -225,7 +228,8 @@ footer{border-top:1px solid var(--line);background:var(--card);padding:22px 0 40
 @media (max-width:600px){
   .mast .hero{padding:18px}
   .q{padding:16px}
-  .hint{margin-left:0;width:100%}
+  .ctrl-row.options .sep{display:none}
+  .hint{width:100%;text-align:center}
 }
 @media print{
   .topbar,nav.tabs,.controls,.levelnav,.actions,.selfscore,.pop{display:none!important}
@@ -275,15 +279,19 @@ footer{border-top:1px solid var(--line);background:var(--card);padding:22px 0 40
       <p class="lede">Highlighted wording is what the descriptor adds or changes compared with the band immediately below. Everything in grey is carried over unchanged.</p>
 
       <div class="controls">
+        <div class="ctrl-row" role="group" aria-label="Criterion">
         <button class="chip crit" data-crit="fc" aria-pressed="true">Fluency &amp; Coherence</button>
         <button class="chip crit" data-crit="lr" aria-pressed="false">Lexical Resource</button>
         <button class="chip crit" data-crit="gra" aria-pressed="false">Grammatical Range &amp; Accuracy</button>
         <button class="chip crit" data-crit="pron" aria-pressed="false">Pronunciation</button>
+        </div>
+        <div class="ctrl-row options" role="group" aria-label="Display">
+        <button class="chip sm" id="btn-ref" aria-pressed="false">Show Bands 4, 8, 9</button>
+        <button class="chip sm" id="btn-diff" aria-pressed="false">Differences only</button>
+        <button class="chip sm" id="btn-hl" aria-pressed="true">Highlighting</button>
         <span class="sep"></span>
-        <button class="chip" id="btn-ref" aria-pressed="false">Show Bands 4, 8, 9</button>
-        <button class="chip" id="btn-diff" aria-pressed="false">Differences only</button>
-        <button class="chip" id="btn-hl" aria-pressed="true">Highlighting</button>
         <span class="hint">Tap any highlight for a gloss and an example</span>
+        </div>
       </div>
 
       <div id="critnote"></div>
